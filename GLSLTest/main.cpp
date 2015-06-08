@@ -66,13 +66,17 @@ int main(int argc, const char * argv[])
         {0.0f, 0.0f, 1.0f}
     };
     
+    const GLuint indices[3] = { 0, 1, 2}; //indices  must start with 0;
+    
+    vao->createIBO(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 3, indices, GL_STATIC_DRAW);
+    
     vao->createVBO(GL_ARRAY_BUFFER, "triangle", 9 * sizeof(GLfloat), (void*) triangleData, GL_STATIC_DRAW);
     triangleshader.registerAttribute("VertexPosition", 3, GL_FLOAT, GL_FALSE, 0, 0, 0);
     
     vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 9*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
     triangleshader.registerAttribute("VertexColor", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
 
-    triangleshader.link();
+    triangleshader.link();                  //link program should after registerAttirbute
     string linklog = triangleshader.getProgramInfoLog();
     cout<<"The linker log is:"<<linklog<<endl;
     triangleshader.use();
@@ -102,7 +106,8 @@ int main(int argc, const char * argv[])
         else {
 //            SDL_UpdateWindowSurface(window);
             //render();
-            vao->draw(GL_TRIANGLES, 0, 3);
+            //vao->draw(GL_TRIANGLES, 0, 3);
+            vao->drawElement(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
             SDL_GL_SwapWindow(window);
         }
 

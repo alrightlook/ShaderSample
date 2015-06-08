@@ -34,6 +34,7 @@ public:
                    const GLvoid * data,
                    GLenum usage);
     void draw(GLenum mode, int first, int count);
+    void drawElement(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices);
     ~VertexArray();
 };
 #endif /* defined(__GLSLTest__VertexArray__) */

@@ -22,12 +22,15 @@ void VertexArray::createIBO(GLenum target,
     glGenBuffers(1, &mIbo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIbo);
     glBufferData(target, size, data, usage);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIbo);
-    
 }
 
 GLuint VertexArray::getVBO(string name) {
     return mMapVbo.find(name)->second;
+}
+
+void VertexArray::drawElement(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices) {
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIbo);
+    glDrawElements(mode, count, type, indices);
 }
 
 VertexArray::~VertexArray() {
