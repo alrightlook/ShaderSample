@@ -54,26 +54,28 @@ int main(int argc, const char * argv[])
     
     
     VertexArray* vao = new VertexArray(triangleshader.getProgramID());
-    const GLfloat triangleData[3][3] = {
-        {0.0f, 1.0f, 0.0f},
-        {1.0f, 0.0f, 0.0f},
-        {-1.0f, 0.0f, 0.0f}
+    const GLfloat triangleData[4][3] = {
+        {1.0f, 1.0f, 0.0f},
+        {1.0f, -1.0f, 0.0f},
+        {-1.0f, -1.0f, 0.0f},
+        {-1.0f, 1.0f, 0.0f},
     };
     
-    const GLfloat triangleColor[3][3] = {
+    const GLfloat triangleColor[4][3] = {
         {1.0f, 0.0f, 0.0f},
         {0.0f, 1.0f, 0.0f},
-        {0.0f, 0.0f, 1.0f}
+        {0.0f, 0.0f, 1.0f},
+        {1.0f, 1.0f, 0.0f}
     };
     
-    const GLuint indices[3] = { 0, 1, 2}; //indices  must start with 0;
+    const GLuint indices[] = { 0,1,2,0,2,3}; //indices  must start with 0;
     
-    vao->createIBO(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 3, indices, GL_STATIC_DRAW);
+    vao->createIBO(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
     
-    vao->createVBO(GL_ARRAY_BUFFER, "triangle", 9 * sizeof(GLfloat), (void*) triangleData, GL_STATIC_DRAW);
+    vao->createVBO(GL_ARRAY_BUFFER, "triangle", 12 * sizeof(GLfloat), (void*) triangleData, GL_STATIC_DRAW);
     triangleshader.registerAttribute("VertexPosition", 3, GL_FLOAT, GL_FALSE, 0, 0, 0);
     
-    vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 9*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
+    vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 12*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
     triangleshader.registerAttribute("VertexColor", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
 
     triangleshader.link();                  //link program should after registerAttirbute
@@ -107,7 +109,7 @@ int main(int argc, const char * argv[])
 //            SDL_UpdateWindowSurface(window);
             //render();
             //vao->draw(GL_TRIANGLES, 0, 3);
-            vao->drawElement(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+            vao->drawElement(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             SDL_GL_SwapWindow(window);
         }
 

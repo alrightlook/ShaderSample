@@ -14,6 +14,8 @@
 		C4155F841B007CD50096E68A /* VertexArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4155F821B007CD50096E68A /* VertexArray.cpp */; };
 		C4155F871B01B5240096E68A /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4155F851B01B5240096E68A /* Utils.cpp */; };
 		C4155F8C1B254CED0096E68A /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4155F8B1B254CED0096E68A /* libassimp.3.1.1.dylib */; };
+		C4155F8F1B26E2570096E68A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4155F8D1B26E2570096E68A /* Texture.cpp */; };
+		C4155F911B26FBD80096E68A /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */; };
 		C46C8F351A90CD7100219B07 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C46C8F341A90CD7100219B07 /* main.cpp */; };
 		C46C8F371A90CD7100219B07 /* GLSLTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C46C8F361A90CD7100219B07 /* GLSLTest.1 */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,9 @@
 		C4155F861B01B5240096E68A /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		C4155F881B01C6C10096E68A /* triangle.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = triangle.vert; sourceTree = "<group>"; };
 		C4155F8B1B254CED0096E68A /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = ../../../../usr/local/Cellar/assimp/3.1.1/lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
+		C4155F8D1B26E2570096E68A /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		C4155F8E1B26E2570096E68A /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.0_1/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		C46C8F311A90CD7100219B07 /* GLSLTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GLSLTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46C8F341A90CD7100219B07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C46C8F361A90CD7100219B07 /* GLSLTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GLSLTest.1; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4155F911B26FBD80096E68A /* libSDL2_image-2.0.0.dylib in Frameworks */,
 				C4155F8C1B254CED0096E68A /* libassimp.3.1.1.dylib in Frameworks */,
 				C4155F751AF348E40096E68A /* OpenGL.framework in Frameworks */,
 				C4155F731AF21B2E0096E68A /* SDL2.framework in Frameworks */,
@@ -66,9 +72,12 @@
 		C46C8F281A90CD7100219B07 = {
 			isa = PBXGroup;
 			children = (
+				C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */,
 				C4155F8B1B254CED0096E68A /* libassimp.3.1.1.dylib */,
 				C4155F7F1AF74DD30096E68A /* Shader.cpp */,
 				C4155F821B007CD50096E68A /* VertexArray.cpp */,
+				C4155F8D1B26E2570096E68A /* Texture.cpp */,
+				C4155F8E1B26E2570096E68A /* Texture.h */,
 				C4155F851B01B5240096E68A /* Utils.cpp */,
 				C4155F861B01B5240096E68A /* Utils.h */,
 				C4155F831B007CD50096E68A /* VertexArray.h */,
@@ -150,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4155F8F1B26E2570096E68A /* Texture.cpp in Sources */,
 				C4155F811AF74DD30096E68A /* Shader.cpp in Sources */,
 				C4155F841B007CD50096E68A /* VertexArray.cpp in Sources */,
 				C46C8F351A90CD7100219B07 /* main.cpp in Sources */,
@@ -242,14 +252,16 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/sdl2_image/2.0.0_1/lib,
 				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = (
 					/usr/local/Cellar/glew/1.11.0/lib,
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/sdl2_image/2.0.0_1/lib,
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-lGLEW";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "/usr/local/Cellar/assimp/3.1.1/include /usr/local/Cellar/glew/1.11.0/include/GL";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/Cellar/assimp/3.1.1/include /usr/local/Cellar/glew/1.11.0/include/GL /usr/local/Cellar/sdl2_image/2.0.0_1/include";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "/usr/local/Cellar/glew/1.11.0/include/GL /usr/local/Cellar/assimp/3.1.1/include";
 			};
 			name = Debug;
@@ -266,14 +278,16 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/sdl2_image/2.0.0_1/lib,
 				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = (
 					/usr/local/Cellar/glew/1.11.0/lib,
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/sdl2_image/2.0.0_1/lib,
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-lGLEW";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"USER_HEADER_SEARCH_PATHS[arch=*]" = "/usr/local/Cellar/glew/1.11.0/include/GL /usr/local/Cellar/assimp/3.1.1/include";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "/usr/local/Cellar/glew/1.11.0/include/GL /usr/local/Cellar/assimp/3.1.1/include /usr/local/Cellar/sdl2_image/2.0.0_1/include";
 			};
 			name = Release;
 		};
