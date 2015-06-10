@@ -8,8 +8,10 @@
 
 #include "Texture.h"
 
-Texture::Texture(GLenum textureTarget, const char* filename) {
+Texture::Texture(GLenum textureTarget,GLenum textureUnit, const char* filename) {
+    mTextureTarget = textureTarget;
     glGenTextures(1, &mTextureID);
+    glActiveTexture(textureUnit);
     glBindTexture(textureTarget, mTextureID);
     
     SDL_Surface* texSurface = IMG_Load(filename);
@@ -37,9 +39,18 @@ Texture::Texture(GLenum textureTarget, const char* filename) {
     
     glTexImage2D(GL_TEXTURE_2D, 0, Mode, texSurface->w, texSurface->h, 0, Mode, GL_UNSIGNED_BYTE, texSurface->pixels);
     
+    std::cout<<"The tex id is:"<<mTextureID<<std::endl;
     SDL_FreeSurface(texSurface);
 }
 
 void Texture::Bind(GLenum textureUnit) {
+    glActiveTexture(textureUnit);
+    glBindTexture(mTextureTarget, mTextureID);
+}
+
+bool Texture::Load(GLuint programId, std::string varName, int value) {
+    glUseProgram(programId);
+    glUniform1i(glGetUniformLocation(programId, varName.c_str()), value);
     
+    return true;
 }

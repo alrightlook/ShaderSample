@@ -12,6 +12,7 @@
 #include <SDL2/SDL_opengl.h>
 #include "Shader.h"
 #include "Utils.h"
+#include "Texture.h"
 #include "VertexArray.h"
 
 void render() {
@@ -55,10 +56,10 @@ int main(int argc, const char * argv[])
     
     VertexArray* vao = new VertexArray(triangleshader.getProgramID());
     const GLfloat triangleData[4][3] = {
-        {1.0f, 1.0f, 0.0f},
-        {1.0f, -1.0f, 0.0f},
-        {-1.0f, -1.0f, 0.0f},
-        {-1.0f, 1.0f, 0.0f},
+        {0.5f, 0.5f, 0.0f},
+        {0.5f, -0.5f, 0.0f},
+        {-0.5f, -0.5f, 0.0f},
+        {-0.5f, 0.5f, 0.0f},
     };
     
     const GLfloat triangleColor[4][3] = {
@@ -67,6 +68,16 @@ int main(int argc, const char * argv[])
         {0.0f, 0.0f, 1.0f},
         {1.0f, 1.0f, 0.0f}
     };
+    
+    const GLfloat texCoord[4][2] = {
+
+        {1.0f, 0.0f},
+        {1.0f, 1.0f},
+        {0.0f, 1.0f},
+        {0.0f, 0.0f}
+    };
+    
+    
     
     const GLuint indices[] = { 0,1,2,0,2,3}; //indices  must start with 0;
     
@@ -77,11 +88,17 @@ int main(int argc, const char * argv[])
     
     vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 12*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
     triangleshader.registerAttribute("VertexColor", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
+    
+    vao->createVBO(GL_ARRAY_BUFFER, "texCoord", sizeof(GLfloat)*8, (void*) texCoord, GL_STATIC_DRAW);
+    triangleshader.registerAttribute("TexCoord", 2, GL_FLOAT, GL_FALSE, 0, 0, 2);
 
     triangleshader.link();                  //link program should after registerAttirbute
     string linklog = triangleshader.getProgramInfoLog();
     cout<<"The linker log is:"<<linklog<<endl;
     triangleshader.use();
+    
+    Texture* tex = new Texture(GL_TEXTURE_2D,GL_TEXTURE0, "brick.png");
+    tex->Load(triangleshader.getProgramID(), "texUnit", 0);
 
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader)
 		printf("Ready for GLSL\n");

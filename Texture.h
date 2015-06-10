@@ -17,12 +17,13 @@
 class Texture
 {
 public:
-    Texture(GLenum textureTarget, const char* filename);
+    Texture(GLenum textureTarget,GLenum textureUnit, const char* filename);
     void Bind(GLenum textureUnit);
-    bool Load();
+    bool Load(GLuint programId, std::string varName, int value);
     ~Texture();
 private:
     GLuint mTextureID;
+    GLenum mTextureTarget;
 };
 
 #endif /* defined(__GLSLTest__Texture__) */
