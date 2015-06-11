@@ -27,7 +27,9 @@ private:
     GLuint mIbo;
 public:
     VertexArray(GLuint programID);
+    VertexArray();
     GLuint getVBO(string name);
+    GLuint getIBO();
     void createVBO(GLenum target, string name, long size, void* data, GLenum usage);
     void createIBO(GLenum target,
                    GLsizeiptr size,

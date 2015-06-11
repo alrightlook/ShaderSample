@@ -14,6 +14,7 @@
 #include "Utils.h"
 #include "Texture.h"
 #include "VertexArray.h"
+#include "Model.h"
 
 void render() {
     //glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -52,45 +53,51 @@ int main(int argc, const char * argv[])
     string fragmentShaderInfo = triangleshader.getShaderInfoLog(Shader::FRAGMENT_SHADER);
     cout<<"The vertex shader compile info is:"<<vertexShaderInfo<<endl;
     cout<<"The fragment Shader compile info is:"<<fragmentShaderInfo<<endl;
-    
-    
-    VertexArray* vao = new VertexArray(triangleshader.getProgramID());
-    const GLfloat triangleData[4][3] = {
-        {0.5f, 0.5f, 0.0f},
-        {0.5f, -0.5f, 0.0f},
-        {-0.5f, -0.5f, 0.0f},
-        {-0.5f, 0.5f, 0.0f},
-    };
-    
-    const GLfloat triangleColor[4][3] = {
-        {1.0f, 0.0f, 0.0f},
-        {0.0f, 1.0f, 0.0f},
-        {0.0f, 0.0f, 1.0f},
-        {1.0f, 1.0f, 0.0f}
-    };
-    
-    const GLfloat texCoord[4][2] = {
 
-        {1.0f, 0.0f},
-        {1.0f, 1.0f},
-        {0.0f, 1.0f},
-        {0.0f, 0.0f}
-    };
+    Model model;
+    model.LoadModel("model/monkey.blend");
+    triangleshader.registerAttribute("VertexPosition", 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0, 0);
+    triangleshader.registerAttribute("TexCoord", 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3*sizeof(float)), 1);
     
     
-    
-    const GLuint indices[] = { 0,1,2,0,2,3}; //indices  must start with 0;
-    
-    vao->createIBO(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
-    
-    vao->createVBO(GL_ARRAY_BUFFER, "triangle", 12 * sizeof(GLfloat), (void*) triangleData, GL_STATIC_DRAW);
-    triangleshader.registerAttribute("VertexPosition", 3, GL_FLOAT, GL_FALSE, 0, 0, 0);
-    
-    vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 12*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
-    triangleshader.registerAttribute("VertexColor", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
-    
-    vao->createVBO(GL_ARRAY_BUFFER, "texCoord", sizeof(GLfloat)*8, (void*) texCoord, GL_STATIC_DRAW);
-    triangleshader.registerAttribute("TexCoord", 2, GL_FLOAT, GL_FALSE, 0, 0, 2);
+//
+//    VertexArray* vao = new VertexArray(triangleshader.getProgramID());
+//    const GLfloat triangleData[4][3] = {
+//        {0.5f, 0.5f, 0.0f},
+//        {0.5f, -0.5f, 0.0f},
+//        {-0.5f, -0.5f, 0.0f},
+//        {-0.5f, 0.5f, 0.0f},
+//    };
+//    
+//    const GLfloat triangleColor[4][3] = {
+//        {1.0f, 0.0f, 0.0f},
+//        {0.0f, 1.0f, 0.0f},
+//        {0.0f, 0.0f, 1.0f},
+//        {1.0f, 1.0f, 0.0f}
+//    };
+//    
+//    const GLfloat texCoord[4][2] = {
+//
+//        {1.0f, 0.0f},
+//        {1.0f, 1.0f},
+//        {0.0f, 1.0f},
+//        {0.0f, 0.0f}
+//    };
+//    
+//    
+//    
+//    const GLuint indices[] = { 0,1,2,0,2,3}; //indices  must start with 0;
+//    
+//    vao->createIBO(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
+//    
+//    vao->createVBO(GL_ARRAY_BUFFER, "triangle", 12 * sizeof(GLfloat), (void*) triangleData, GL_STATIC_DRAW);
+//    triangleshader.registerAttribute("VertexPosition", 3, GL_FLOAT, GL_FALSE, 0, 0, 0);
+//    
+//    vao->createVBO(GL_ARRAY_BUFFER, "trianglecolor", 12*sizeof(GLfloat), (void*) triangleColor, GL_STATIC_DRAW);
+//    triangleshader.registerAttribute("VertexColor", 3, GL_FLOAT, GL_FALSE, 0, 0, 1);
+//    
+//    vao->createVBO(GL_ARRAY_BUFFER, "texCoord", sizeof(GLfloat)*8, (void*) texCoord, GL_STATIC_DRAW);
+//    triangleshader.registerAttribute("TexCoord", 2, GL_FLOAT, GL_FALSE, 0, 0, 2);
 
     triangleshader.link();                  //link program should after registerAttirbute
     string linklog = triangleshader.getProgramInfoLog();
@@ -114,6 +121,8 @@ int main(int argc, const char * argv[])
 		exit(1);
 	}
     
+    
+    
     bool quit = false;
     SDL_Event event;
     while (!quit) {
@@ -126,7 +135,8 @@ int main(int argc, const char * argv[])
 //            SDL_UpdateWindowSurface(window);
             //render();
             //vao->draw(GL_TRIANGLES, 0, 3);
-            vao->drawElement(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            //vao->drawElement(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            model.Render();
             SDL_GL_SwapWindow(window);
         }
 

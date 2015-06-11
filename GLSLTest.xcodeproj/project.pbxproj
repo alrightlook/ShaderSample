@@ -16,8 +16,11 @@
 		C4155F8C1B254CED0096E68A /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4155F8B1B254CED0096E68A /* libassimp.3.1.1.dylib */; };
 		C4155F8F1B26E2570096E68A /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4155F8D1B26E2570096E68A /* Texture.cpp */; };
 		C4155F911B26FBD80096E68A /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */; };
+		C4155F941B27F6E80096E68A /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4155F921B27F6E80096E68A /* Model.cpp */; };
 		C46C8F351A90CD7100219B07 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C46C8F341A90CD7100219B07 /* main.cpp */; };
 		C46C8F371A90CD7100219B07 /* GLSLTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C46C8F361A90CD7100219B07 /* GLSLTest.1 */; };
+		C49CD5F71B280F8C000ED4EB /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C49CD5F51B280F8C000ED4EB /* Vertex.cpp */; };
+		C49CD5FD1B285AEA000ED4EB /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C49CD5FB1B285AEA000ED4EB /* Mesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,9 +51,15 @@
 		C4155F8D1B26E2570096E68A /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		C4155F8E1B26E2570096E68A /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.0_1/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		C4155F921B27F6E80096E68A /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		C4155F931B27F6E80096E68A /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		C46C8F311A90CD7100219B07 /* GLSLTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GLSLTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46C8F341A90CD7100219B07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C46C8F361A90CD7100219B07 /* GLSLTest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GLSLTest.1; sourceTree = "<group>"; };
+		C49CD5F51B280F8C000ED4EB /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		C49CD5F61B280F8C000ED4EB /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		C49CD5FB1B285AEA000ED4EB /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		C49CD5FC1B285AEA000ED4EB /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +81,18 @@
 		C46C8F281A90CD7100219B07 = {
 			isa = PBXGroup;
 			children = (
+				C49CD5FB1B285AEA000ED4EB /* Mesh.cpp */,
+				C49CD5FC1B285AEA000ED4EB /* Mesh.h */,
 				C4155F901B26FBD80096E68A /* libSDL2_image-2.0.0.dylib */,
 				C4155F8B1B254CED0096E68A /* libassimp.3.1.1.dylib */,
 				C4155F7F1AF74DD30096E68A /* Shader.cpp */,
 				C4155F821B007CD50096E68A /* VertexArray.cpp */,
 				C4155F8D1B26E2570096E68A /* Texture.cpp */,
 				C4155F8E1B26E2570096E68A /* Texture.h */,
+				C4155F921B27F6E80096E68A /* Model.cpp */,
+				C4155F931B27F6E80096E68A /* Model.h */,
+				C49CD5F51B280F8C000ED4EB /* Vertex.cpp */,
+				C49CD5F61B280F8C000ED4EB /* Vertex.h */,
 				C4155F851B01B5240096E68A /* Utils.cpp */,
 				C4155F861B01B5240096E68A /* Utils.h */,
 				C4155F831B007CD50096E68A /* VertexArray.h */,
@@ -159,10 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49CD5F71B280F8C000ED4EB /* Vertex.cpp in Sources */,
 				C4155F8F1B26E2570096E68A /* Texture.cpp in Sources */,
 				C4155F811AF74DD30096E68A /* Shader.cpp in Sources */,
 				C4155F841B007CD50096E68A /* VertexArray.cpp in Sources */,
+				C4155F941B27F6E80096E68A /* Model.cpp in Sources */,
 				C46C8F351A90CD7100219B07 /* main.cpp in Sources */,
+				C49CD5FD1B285AEA000ED4EB /* Mesh.cpp in Sources */,
 				C4155F871B01B5240096E68A /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

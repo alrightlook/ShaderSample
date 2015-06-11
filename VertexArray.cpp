@@ -7,11 +7,18 @@
 //
 
 #include "VertexArray.h"
+VertexArray::VertexArray() {
+    glGenVertexArrays(1, &mVao);
+    glBindVertexArray(mVao);
+}
 
 VertexArray::VertexArray(GLuint programID) {
     mProgramID = programID;
     glGenVertexArrays(1, &mVao);
     glBindVertexArray(mVao);
+}
+GLuint VertexArray::getIBO() {
+    return mIbo;
 }
 
 void VertexArray::createIBO(GLenum target,
